@@ -179,7 +179,7 @@ let equality = () => {
 
 let clear = () => {
 	removeOperationStyle();
-	actions = "0";
+	actions = "";
 	placeOfResultDisplayed.innerHTML = "";
 	currentNumber = "0";
 	updateDisplayedNumber();
