@@ -49,6 +49,16 @@ let backspace = () => {
 };
 
 let percentage = () => {
+	if (actions.length > 0) {
+		if (
+			actions.slice(-1) === "*" ||
+			actions.slice(-1) === "/" ||
+			actions.slice(-1) === "-" ||
+			actions.slice(-1) === "+"
+		) {
+			return;
+		}
+	}
 	currentNumber = "";
 	actions += "/100";
 	equality();
@@ -146,15 +156,30 @@ let equality = () => {
 		placeOfResultDisplayed.innerHTML = "Error";
 		return;
 	}
-	let result = eval(actions);
-	placeOfResultDisplayed.innerHTML = result;
-	actions = result;
-	console.log(actions);
+	if (actions.length > 1) {
+		if (
+			actions.slice(-1) === "*" ||
+			actions.slice(-1) === "/" ||
+			actions.slice(-1) === "-" ||
+			actions.slice(-1) === "+"
+		) {
+			let resultLast = actions.slice(0, -1);
+			resultLast = eval(resultLast);
+			placeOfResultDisplayed.innerHTML = resultLast;
+			actions = resultLast;
+			console.log(actions);
+		} else {
+			let result = eval(actions);
+			placeOfResultDisplayed.innerHTML = result;
+			actions = result;
+			console.log(actions);
+		}
+	}
 };
 
 let clear = () => {
 	removeOperationStyle();
-	actions = "";
+	actions = "0";
 	placeOfResultDisplayed.innerHTML = "";
 	currentNumber = "0";
 	updateDisplayedNumber();
@@ -175,10 +200,10 @@ percentageButton.addEventListener("click", () => {
 
 numberButtons.forEach((button) => {
 	button.addEventListener("click", () => {
-		if(currentNumber.length === 6){
-			placeOfResultDisplayed.style.fontSize = "90%"
-		} else if(currentNumber.length === 5) {
-			placeOfResultDisplayed.style.fontSize = "100%"
+		if (currentNumber.length === 6) {
+			placeOfResultDisplayed.style.fontSize = "90%";
+		} else if (currentNumber.length === 5) {
+			placeOfResultDisplayed.style.fontSize = "100%";
 		}
 		removeOperationStyle();
 		if (currentNumber === "0") {
