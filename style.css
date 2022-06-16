@@ -28,10 +28,10 @@ body {
 #calculator {
 	background-color: var(--color-bg);
 	border-radius: 10px;
-	height: 80vw;
+	height: 90vh;
 	max-height: 700px;
 	max-width: 400px;
-	width: 46vw;
+	width: 90vw;
 }
 
 #results {
@@ -40,7 +40,7 @@ body {
 	border-radius: 10px 10px;
 	color: var(--color-font-result);
 	display: flex;
-	font-size: 7em;
+	font-size: 7vh;
 	height: 28%;
 	justify-content: flex-end;
 	margin-right: 5%;
