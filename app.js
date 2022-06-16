@@ -214,6 +214,9 @@ numberButtons.forEach((button) => {
 			if (currentNumber.includes(",")) {
 				return;
 			}
+			if (currentNumber.length === 0) {
+				currentNumber += "0";
+			}
 			divideButton.classList.remove("active");
 			actions += ".";
 			currentNumber += button.textContent;
