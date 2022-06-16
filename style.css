@@ -160,3 +160,7 @@ body {
 	background-color: var(--color-font-operations);
 	color: var(--color-operations);
 }
+
+.click{
+	background-color: grey;
+}
