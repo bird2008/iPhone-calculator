@@ -3,7 +3,7 @@ const placeOfResultDisplayed = document.getElementById("result");
 
 //display result
 let actions = "";
-let currentNumber = "";
+let displayedNumber = "";
 
 //get buttons
 const clearButton = document.getElementById("clear");
@@ -27,7 +27,7 @@ let removeOperationStyle = () => {
 };
 
 let updateDisplayedNumber = () => {
-	placeOfResultDisplayed.innerHTML = currentNumber;
+	placeOfResultDisplayed.innerHTML = displayedNumber;
 };
 
 let backspace = () => {
@@ -42,8 +42,8 @@ let backspace = () => {
 			return;
 		}
 		actions = actions.slice(0, -1);
-		currentNumber = currentNumber.slice(0, -1);
-		if (currentNumber.length === 9) {
+		displayedNumber = displayedNumber.slice(0, -1);
+		if (displayedNumber.length === 8) {
 			placeOfResultDisplayed.style.fontSize = "100%";
 		}
 		updateDisplayedNumber();
@@ -52,8 +52,8 @@ let backspace = () => {
 };
 
 let percentage = () => {
-	if(actions.length === 0) {
-		return
+	if (actions.length === 0) {
+		return;
 	}
 	if (actions.length > 0) {
 		if (
@@ -65,7 +65,7 @@ let percentage = () => {
 			return;
 		}
 	}
-	currentNumber = "";
+	displayedNumber = "";
 	actions += "/100";
 	equality();
 };
@@ -73,7 +73,7 @@ let percentage = () => {
 let divide = () => {
 	removeOperationStyle();
 	divideButton.classList.add("active");
-	currentNumber = "";
+	displayedNumber = "";
 
 	if (actions.length > 0) {
 		if (actions.slice(-1) === "/") {
@@ -94,7 +94,7 @@ let divide = () => {
 let multiply = () => {
 	removeOperationStyle();
 	multiplyButton.classList.add("active");
-	currentNumber = "";
+	displayedNumber = "";
 
 	if (actions.length > 0) {
 		if (actions.slice(-1) === "*") {
@@ -115,7 +115,7 @@ let multiply = () => {
 let minus = () => {
 	removeOperationStyle();
 	minusButton.classList.add("active");
-	currentNumber = "";
+	displayedNumber = "";
 
 	if (actions.length > 0) {
 		if (actions.slice(-1) === "-") {
@@ -136,7 +136,7 @@ let minus = () => {
 let plus = () => {
 	removeOperationStyle();
 	plusButton.classList.add("active");
-	currentNumber = "";
+	displayedNumber = "";
 
 	if (actions.length > 0) {
 		if (actions.slice(-1) === "+") {
@@ -156,7 +156,6 @@ let plus = () => {
 
 let equality = () => {
 	removeOperationStyle();
-	currentNumber = "";
 
 	if (actions.includes("/0")) {
 		placeOfResultDisplayed.innerHTML = "Error";
@@ -191,6 +190,8 @@ let equality = () => {
 			placeOfResultDisplayed.innerHTML = finalResult;
 			actions = finalResult;
 			console.log(actions);
+			displayedNumber = finalResult;
+			updateDisplayedNumber;
 		}
 	}
 };
@@ -199,7 +200,7 @@ let clear = () => {
 	removeOperationStyle();
 	actions = "";
 	placeOfResultDisplayed.innerHTML = "";
-	currentNumber = "0";
+	displayedNumber = "0";
 	resultLast = "";
 	finalResult = "";
 	updateDisplayedNumber();
@@ -222,33 +223,33 @@ percentageButton.addEventListener("click", () => {
 numberButtons.forEach((button) => {
 	button.addEventListener("click", () => {
 		removeOperationStyle();
-		if (currentNumber.length === 10) {
+		if (displayedNumber.length === 10) {
 			return;
 		}
-		if (currentNumber.length === 9) {
+		if (displayedNumber.length === 8) {
 			placeOfResultDisplayed.style.fontSize = "90%";
 		}
-		if (currentNumber === "0") {
-			currentNumber = "";
+		if (displayedNumber === "0") {
+			displayedNumber = "";
 			updateDisplayedNumber();
 		}
 		if (button.textContent === ",") {
-			if (currentNumber.includes(",")) {
+			if (displayedNumber.includes(",")) {
 				return;
 			}
-			if (currentNumber.length === 0) {
-				currentNumber += "0";
+			if (displayedNumber.length === 0) {
+				displayedNumber += "0";
 			}
 			divideButton.classList.remove("active");
 			actions += ".";
-			currentNumber += button.textContent;
+			displayedNumber += button.textContent;
 			updateDisplayedNumber();
 
 			console.log(actions);
 		} else {
 			divideButton.classList.remove("active");
 			actions += button.textContent;
-			currentNumber += button.textContent;
+			displayedNumber += button.textContent;
 			updateDisplayedNumber();
 
 			console.log(actions);
