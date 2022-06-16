@@ -223,7 +223,7 @@ percentageButton.addEventListener("click", () => {
 numberButtons.forEach((button) => {
 	button.addEventListener("click", () => {
 		removeOperationStyle();
-		if (displayedNumber.length === 10) {
+		if (displayedNumber.length === 9) {
 			return;
 		}
 		if (displayedNumber.length === 8) {
